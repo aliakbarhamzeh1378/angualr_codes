@@ -3,7 +3,7 @@
 <div id="calculator">
   <div id="result" style="height:120px;">
     <div id="history">
-      {{history}}
+      {{number}}
       <p id="history-value"></p>
     </div>
     <div id="output">
@@ -11,36 +11,36 @@
     </div>
   </div>
   <div id="keyboard">
-    <button class="operator" (click)="click('C')">C</button>
-    <button class="operator" (click)="click('CE')">CE</button>
-    <button class="operator" (click)="click('%')">%</button>
-    <button class="operator" (click)="click('/')">&#247;</button>
+    <button class="operator" (click)="clickClear()">C</button>
+    <button class="operator" (click)="clickClearAll()">CE</button>
+    <button class="operator" (click)="removeItem()"><-</button>
+    <button class="operator" (click)="clickOperator('/')">&#247;</button>
 
-    <button class="number" (click)="click('7')">7</button>
+    <button class="number" (click)="clickNumber('7')">7</button>
 
-    <button class="number" (click)="click('8')">8</button>
+    <button class="number" (click)="clickNumber('8')">8</button>
 
-    <button class="number" (click)="click('9')">9</button>
-    <button class="operator" (click)="click('*')">&times;</button>
+    <button class="number" (click)="clickNumber('9')">9</button>
+    <button class="operator" (click)="clickOperator('*')">&times;</button>
 
-    <button class="number" (click)="click('4')">4</button>
-    <button class="number" (click)="click('5')">5</button>
-    <button class="number" (click)="click('6')">6</button>
-
-
-    <button class="operator" (click)="click('-')">-</button>
-
-    <button class="number" (click)="click('1')">1</button>
-    <button class="number" (click)="click('2')">2</button>
-    <button class="number" (click)="click('3')">3</button>
-
-    <button class="operator" (click)="click('+')">+</button>
-    <button class="number" (click)="click('00')">00</button>
-    <button class="number" (click)="click('0')">0</button>
-    <button class="number" (click)="click('.')">.</button>
+    <button class="number" (click)="clickNumber('4')">4</button>
+    <button class="number" (click)="clickNumber('5')">5</button>
+    <button class="number" (click)="clickNumber('6')">6</button>
 
 
-    <button class="operator" (click)="click('=')">=</button>
+    <button class="operator" (click)="clickOperator('-')">-</button>
+
+    <button class="number" (click)="clickNumber('1')">1</button>
+    <button class="number" (click)="clickNumber('2')">2</button>
+    <button class="number" (click)="clickNumber('3')">3</button>
+
+    <button class="operator" (click)="clickOperator('+')">+</button>
+    <button class="number" (click)="clickNumber('00')">00</button>
+    <button class="number" (click)="clickNumber('0')">0</button>
+    <button class="number" (click)="clickNumber('.')">.</button>
+
+
+    <button class="operator" (click)="clickCalculate()">=</button>
   </div>
 </div>
 

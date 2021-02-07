@@ -8,44 +8,73 @@ import {Component} from '@angular/core';
 export class AppComponent {
   title = 'Calculator 1';
 
+  public number = '';
   public result = '';
-  public history = '';
-  private operator = ['-', '+', '*', 'C', 'CE', '%', '/'];
 
-  isNumber(input): boolean {
-    return !isNaN(Number(input));
+  clickNumber(input: string): void {
+    // Do Not Allow . more than once
+    if (input === '.') {
+      if (this.number !== '') {
+
+        if (this.number.indexOf('.') >= 0) {
+          return;
+        }
+      }
+    }
+    if (input === '0') {
+      if (this.number === '') {
+        return;
+      }
+      const PrevKey = this.number[this.number.length - 1];
+      if (PrevKey === '/' || PrevKey === '*' || PrevKey === '-' || PrevKey === '+') {
+        return;
+      }
+    }
+    this.number = this.number + input;
+    this.clickCalculate();
+
   }
 
-  click(input: string): void {
-
-    // check input is number or no
-    if (this.isNumber(input) === true) {
-      this.result = this.result + input;
-    } else {
-      if (input === 'C') {
-        this.result = '';
-        return;
-      }
-      if (input === 'CE') {
-        this.result = '';
-        this.history = '';
-        return;
-      }
-      // check result is empty or not
-      if (this.result === '') {
-        // check last character is operator or not
-        // if is operator replace it with new operator
-        if (this.operator.includes(this.history.slice(-1))) {
-          this.history = this.history.slice(0, -1) + input;
-        }
-      } else {
-        // append the result to history
-
-        this.history = this.history + this.result + input;
-        this.result = '';
-      }
-
+  clickOperator(input: string): void {
+    // Do not allow operators more than once
+    const lastKey = this.number[this.number.length - 1];
+    if (lastKey === '/' || lastKey === '*' || lastKey === '-' || lastKey === '+') {
+      return;
     }
+
+    this.number = this.number + input;
+  }
+
+  clickClear(): void {
+    this.number = '';
+  }
+
+  clickClearAll(): void {
+    this.number = '';
+    this.result = '';
+  }
+
+  removeItem(): void {
+    this.number = this.number.substr(0, this.number.length - 1);
+  }
+
+  clickCalculate(): void {
+    let formula = this.number;
+
+    let lastKey = formula[formula.length - 1];
+
+    if (lastKey === '.') {
+      formula = formula.substr(0, formula.length - 1);
+    }
+
+    lastKey = formula[formula.length - 1];
+
+    if (lastKey === '/' || lastKey === '*' || lastKey === '-' || lastKey === '+' || lastKey === '.') {
+      formula = formula.substr(0, formula.length - 1);
+    }
+
+    // tslint:disable-next-line:no-eval
+    this.result = eval(formula);
   }
 
 
